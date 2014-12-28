@@ -1,4 +1,4 @@
-package com.example.jessezhou.bluetoothblink2;
+package com.example.jessezhou.DrawbotRemote;
 
 import android.bluetooth.BluetoothSocket;
 
@@ -8,30 +8,31 @@ import java.io.OutputStream;
 /**
  * Created by Jesse Zhou on 12/27/2014.
  */
-public class BlinkCommand{
+public class DrawbotCommand{
 
     OutputStream sender;
 
-    public BlinkCommand(BluetoothSocket btSocket){
+    public DrawbotCommand(BluetoothSocket btSocket){
         try {
             sender = btSocket.getOutputStream();
         }
         catch(IOException e){}
     }
 
-    public void blinkOn(){
+    public void drawTT(){
         try {
-            sender.write(1);
+            sender.write(Constants.DRAW_THETA_TAU);
             sender.flush();
         }
         catch(IOException e){}
     }
 
-    public void blinkOff(){
+    public void stopDrawing(){
         try {
-            sender.write(0);
+            sender.write(Constants.STOP_DRAWING);
             sender.flush();
         }
         catch(IOException e){}
     }
+
 }

@@ -48,10 +48,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hold to turn light on"
-        android:id="@+id/blinkButton"
-        android:layout_below="@id/listView"
-        android:onClick="sendOnByte"/>
+        android:text="Draw Theta Tau"
+        android:id="@+id/drawButton"
+        android:layout_below="@id/listView"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop the Drawbot"
+        android:id="@+id/stopButton"
+        android:layout_below="@id/drawButton"/>
 
 
 

@@ -1,4 +1,4 @@
-package com.example.jessezhou.bluetoothblink2;
+package com.example.jessezhou.DrawbotRemote;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * Created by Jesse Zhou on 12/26/2014.
  */
-public class BlinkConnectThread extends Thread{
+public class DrawbotConnectThread extends Thread{
 
     // Bluetooth Serial UUID (needed for connection). The UUID should be
     // almost universal for all BT serial boards
@@ -23,7 +23,7 @@ public class BlinkConnectThread extends Thread{
     // Handler for main thread
     private Handler handler;
 
-    public BlinkConnectThread(BluetoothDevice remote, Handler uiHandler){
+    public DrawbotConnectThread(BluetoothDevice remote, Handler uiHandler){
         btDev = remote;
         handler = uiHandler;
 

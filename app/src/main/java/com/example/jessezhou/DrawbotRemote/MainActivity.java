@@ -1,4 +1,4 @@
-package com.example.jessezhou.bluetoothblink2;
+package com.example.jessezhou.DrawbotRemote;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
 
     // UI elements
     private ListView listView;
-    private Button blinkButton, bList;
+    private Button drawbotButton, stopButton, bList;
 
     //Bluetooth elements
     private BluetoothAdapter btAdapter;
@@ -44,7 +43,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void init(){
-        blinkButton = (Button)findViewById(R.id.blinkButton);
+        drawbotButton = (Button)findViewById(R.id.drawButton);
+        stopButton = (Button)findViewById(R.id.stopButton);
+
         bList = (Button)findViewById(R.id.bList);
         listView = (ListView)findViewById(R.id.listView);
 
@@ -110,28 +111,28 @@ public class MainActivity extends ActionBarActivity {
 
     private synchronized BluetoothSocket connect(BluetoothDevice tmp){
         Toast.makeText(getApplicationContext(), "Connecting...", Toast.LENGTH_LONG).show();
-        BlinkConnectThread connectBlink = new BlinkConnectThread(tmp, handler);
-        connectBlink.start();
-        return connectBlink.getBTSocket();
+        DrawbotConnectThread connectDrawbot = new DrawbotConnectThread(tmp, handler);
+        connectDrawbot.start();
+        return connectDrawbot.getBTSocket();
     }
 
     private synchronized void startCommand(BluetoothSocket btSocket){
-        final BlinkCommand controller = new BlinkCommand(btSocket);
-        blinkButton.setOnTouchListener(new View.OnTouchListener() {
+        final DrawbotCommand controller = new DrawbotCommand(btSocket);
+        drawbotButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        controller.blinkOn();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        controller.blinkOff();
-                        break;
-                }
-
-                return true;
+            public void onClick(View v) {
+                controller.drawTT();
             }
         });
+
+        stopButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                controller.stopDrawing();
+            }
+        });
+
+
     }
 
 }
