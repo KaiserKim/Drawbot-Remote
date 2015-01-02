@@ -13,6 +13,12 @@ public interface Constants {
 
     //Draw constants
     public static final int DRAW_THETA_TAU = 10;
-    public static final int STOP_DRAWING = 11;
+    public static final int MOVE_FORWARD   = 11;
+    public static final int MOVE_BACKWARD  = 12;
+    public static final int MOVE_RIGHT     = 13;
+    public static final int MOVE_LEFT      = 14;
+    public static final int MOVE_STOP      = 15;
+    public static final int PEN_UP         = 16;
+    public static final int PEN_DOWN       = 17;
 
 }

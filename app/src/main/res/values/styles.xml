@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Button theme -->
+    <style name="ButtonTheme">
+        <item name="android:background">#F0C03C</item>
+        <item name="android:textColor">#CC0407</item>
+    </style>
+
 </resources>

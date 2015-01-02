@@ -8,57 +8,52 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bluetooth Test Application"
+        android:text="Lambda Drawbot Remote"
         android:id="@+id/title"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bluetooth On"
-        android:id="@+id/bOn"
-        android:layout_below="@+id/title"
-        android:onClick="on"/>
+        android:id="@+id/btOnOff"
+        android:layout_below="@id/title"
+        android:weightSum="1">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Bluetooth On"
+            android:id="@+id/bOn"
+            android:onClick="on"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Bluetooth off"
+            android:id="@+id/bOff"
+            android:layout_toRightOf="@+id/bOn"
+            android:onClick="off"/>
+    </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bluetooth off"
-        android:id="@+id/bOff"
-        android:layout_below="@+id/bOn"
-        android:onClick="off"/>
-
-    <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="List all devices"
         android:id="@+id/bList"
-        android:layout_below="@+id/bOff"
+        android:layout_below="@+id/btOnOff"
         android:onClick="list"/>
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="fill_parent"
         android:id="@+id/listView"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="false"
         android:layout_below="@id/bList"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Draw Theta Tau"
-        android:id="@+id/drawButton"
-        android:layout_below="@id/listView"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop the Drawbot"
-        android:id="@+id/stopButton"
-        android:layout_below="@id/drawButton"/>
-
-
 
 </RelativeLayout>

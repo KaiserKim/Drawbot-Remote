@@ -2,11 +2,9 @@ package com.example.jessezhou.DrawbotRemote;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,21 +13,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    // UI elements
-    private ListView listView;
-    private Button drawbotButton, stopButton, bList;
-
-    //Bluetooth elements
+    // Bluetooth Components
     private BluetoothAdapter btAdapter;
     private Set<BluetoothDevice> pairedDevices;
-    private OutputStream sender;
+
+    private Button bList;
+    private ListView listView;
 
     //Handler to handle background thread work
     private Handler handler;
@@ -43,29 +38,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void init(){
-        drawbotButton = (Button)findViewById(R.id.drawButton);
-        stopButton = (Button)findViewById(R.id.stopButton);
 
         bList = (Button)findViewById(R.id.bList);
         listView = (ListView)findViewById(R.id.listView);
-
         btAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        handler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                switch(msg.what){
-                    case Constants.BLUETOOTH_CONNECT:
-                        if(msg.arg1 == Constants.CONNECTION_SUCCESS){
-                            Toast.makeText(getApplicationContext(), "Connection worked!", Toast.LENGTH_SHORT).show();
-                            System.out.println("Handler is working");
-                        }
-                        else if(msg.arg1 == Constants.CONNECTION_FAILED){
-                            Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
-                        }
-                }
-            }
-        };
 
     }
 
@@ -97,41 +73,16 @@ public class MainActivity extends ActionBarActivity {
 
         Toast.makeText(getApplicationContext(),"Showing Paired Devices", Toast.LENGTH_SHORT).show();
         final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
 
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BluetoothSocket btSocket = connect((BluetoothDevice) btArray[position]);
-                startCommand(btSocket);
+                Intent openController = new Intent(MainActivity.this, ControllerActivity.class);
+                openController.putExtra("DESIRED_DEVICE", (BluetoothDevice)btArray[position]);
+                MainActivity.this.startActivity(openController);
             }
         });
-
-    }
-
-    private synchronized BluetoothSocket connect(BluetoothDevice tmp){
-        Toast.makeText(getApplicationContext(), "Connecting...", Toast.LENGTH_LONG).show();
-        DrawbotConnectThread connectDrawbot = new DrawbotConnectThread(tmp, handler);
-        connectDrawbot.start();
-        return connectDrawbot.getBTSocket();
-    }
-
-    private synchronized void startCommand(BluetoothSocket btSocket){
-        final DrawbotCommand controller = new DrawbotCommand(btSocket);
-        drawbotButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                controller.drawTT();
-            }
-        });
-
-        stopButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                controller.stopDrawing();
-            }
-        });
-
 
     }
 
