@@ -1,22 +1,23 @@
 package com.example.jessezhou.DrawbotRemote;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-public class ControllerActivity extends ActionBarActivity {
+public class ControllerActivity extends Activity {
 
     private Handler handler;
 
-    private Button bUp, bDown, bRight, bLeft;
-    private Button penUp, penDown;
-    private Button drawTT, calibrate;
+    private ImageButton bUp, bDown, bRight, bLeft;
+    private ImageButton penUp, penDown;
+    private ImageView drawTT, calibrate;
 
     private BluetoothDevice desiredDevice;
     private DrawbotCommand controller;
@@ -57,14 +58,14 @@ public class ControllerActivity extends ActionBarActivity {
         connect(desiredDevice);
 
         //Initialize the UI elements
-        bUp = (Button)findViewById(R.id.buttonForward);
-        bDown = (Button)findViewById(R.id.buttonDown);
-        bRight = (Button)findViewById(R.id.buttonRight);
-        bLeft = (Button)findViewById(R.id.buttonLeft);
-        penUp = (Button)findViewById(R.id.buttonPenUp);
-        penDown = (Button)findViewById(R.id.buttonPenDown);
-        drawTT = (Button)findViewById(R.id.buttonDrawTT);
-        calibrate = (Button)findViewById(R.id.buttonCalibrate);
+        bUp = (ImageButton)findViewById(R.id.buttonForward);
+        bDown = (ImageButton)findViewById(R.id.buttonDown);
+        bRight = (ImageButton)findViewById(R.id.buttonRight);
+        bLeft = (ImageButton)findViewById(R.id.buttonLeft);
+        penUp = (ImageButton)findViewById(R.id.buttonPenUp);
+        penDown = (ImageButton)findViewById(R.id.buttonPenDown);
+        drawTT = (ImageView)findViewById(R.id.buttonDrawTT);
+        calibrate = (ImageView)findViewById(R.id.buttonRecalibrate);
     }
 
     private void startDPadlisteners() {

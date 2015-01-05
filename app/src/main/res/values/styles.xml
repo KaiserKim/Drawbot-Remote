@@ -5,10 +5,31 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <!-- Button theme -->
-    <style name="ButtonTheme">
-        <item name="android:background">#F0C03C</item>
-        <item name="android:textColor">#CC0407</item>
+    <!-- Button themes -->
+    <style name="MidSectionButtons">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">10dp</item>
     </style>
+
+    <style name="DPadButtons">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">#590000</item>
+    </style>
+
+    <style name="ABButtons">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">#590000</item>
+    </style>
+
 
 </resources>
